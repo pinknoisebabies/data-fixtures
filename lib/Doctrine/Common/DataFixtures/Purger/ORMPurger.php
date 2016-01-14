@@ -133,6 +133,9 @@ class ORMPurger implements PurgerInterface
         }
 
         $connection = $this->em->getConnection();
+        if ($this->purgeMode === self::PURGE_MODE_TRUNCATE) {
+            $connection->query('SET FOREIGN_KEY_CHECKS=0');
+        }
         foreach($orderedTables as $tbl) {
             if ($this->purgeMode === self::PURGE_MODE_DELETE) {
                 $tbl = $connection->quoteIdentifier($tbl);
@@ -140,6 +143,9 @@ class ORMPurger implements PurgerInterface
             } else {
                 $connection->executeUpdate($platform->getTruncateTableSQL($tbl, true));
             }
+        }
+        if ($this->purgeMode === self::PURGE_MODE_TRUNCATE) {
+            $connection->query('SET FOREIGN_KEY_CHECKS=1');
         }
     }
 
