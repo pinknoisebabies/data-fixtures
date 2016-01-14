@@ -23,6 +23,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Internal\CommitOrderCalculator;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 /**
@@ -133,7 +134,7 @@ class ORMPurger implements PurgerInterface
         }
 
         $connection = $this->em->getConnection();
-        if ($this->purgeMode === self::PURGE_MODE_TRUNCATE) {
+        if ($platform instanceof MySqlPlatform && $this->purgeMode === self::PURGE_MODE_TRUNCATE) {
             $connection->query('SET FOREIGN_KEY_CHECKS=0');
         }
         foreach($orderedTables as $tbl) {
@@ -144,7 +145,7 @@ class ORMPurger implements PurgerInterface
                 $connection->executeUpdate($platform->getTruncateTableSQL($tbl, true));
             }
         }
-        if ($this->purgeMode === self::PURGE_MODE_TRUNCATE) {
+        if ($platform instanceof MySqlPlatform && $this->purgeMode === self::PURGE_MODE_TRUNCATE) {
             $connection->query('SET FOREIGN_KEY_CHECKS=1');
         }
     }
