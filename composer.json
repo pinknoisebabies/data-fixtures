@@ -1,5 +1,5 @@
 {
-    "name": "pinknoisebabies/data-fixtures/data-fixtures",
+    "name": "pinknoisebabies/data-fixtures",
     "type": "library",
     "description": "Data Fixtures for all Doctrine Object Managers",
     "keywords": ["database"],
