@@ -1,12 +1,12 @@
 {
-    "name": "doctrine/data-fixtures",
+    "name": "pinknoisebabies/data-fixtures/data-fixtures",
     "type": "library",
     "description": "Data Fixtures for all Doctrine Object Managers",
     "keywords": ["database"],
-    "homepage": "http://www.doctrine-project.org",
+    "homepage": "https://github.com/pinknoisebabies",
     "license": "MIT",
     "authors": [
-        {"name": "Jonathan Wage", "email": "jonwage@gmail.com"}
+        {"name": "pinknoisebabies", "email": "github@kick-their-ass.co.uk"}
     ],
     "require": {
         "php": ">=5.3.2",
